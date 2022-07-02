@@ -1,49 +1,56 @@
-import { MONGO_URL } from "./constants/surveys.constants";
 import { Application } from "express";
-import { SurveysController } from "./controllers/surveys.controller";
-import { SurveysService } from "./services/surveys.service";
+import { DashboardRouting } from "./routes/dashboard.routing";
+import dashboardMiddleware from "./middlewares/dashboard.middleware";
 import bodyParser from "body-parser";
 import cors from "cors";
 import express from "express";
 import mongoose from "mongoose";
+import config from "./config";
 
 class App {
-  public app: Application;
+    public app: Application;
 
-  constructor() {
-    this.app = express();
-    this.setConfig();
-    this.setMongoConfig();
-    this.setControllers();
-  }
+    constructor() {
+        this.app = express();
+        this.setAppConfig();
+        this.setMongoConfig();
+        this.setRoutes();
+        this.setViews();
+    }
 
-  private setConfig() {
-    // Allows us to receive requests with data in json format
-    this.app.use(bodyParser.json({ limit: "50mb" }));
-    // Allows us to receive requests with data in x-www-form-urlencoded format
-    this.app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
-    // Enables cors
-    this.app.use(cors());
-  }
+    private setAppConfig() {
+        this.app.use(bodyParser.json({ limit: "50mb" }));
+        this.app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
+        this.app.use(cors());
 
-  private setMongoConfig() {
+        const session = require('express-session');
+        if (this.app.get('env') === 'production') {
+            this.app.set('trust proxy', 1);
+        }
+        this.app.use(session(config.app.session));
+    }
+
+    private setMongoConfig() {
         mongoose.Promise = global.Promise;
-        mongoose.connect(MONGO_URL);
+        mongoose.connect(config.mongo.url);
         mongoose.set("toJSON", {
             virtuals: true,
             transform: (_: any, converted: any) => {
                 delete converted._id;
             },
         });
-  }
+    }
 
-  private setControllers() {
-    // Creating a new instance of our Pokemon Controller
-    const surveysController = new SurveysController(new SurveysService());
+    private setRoutes() {
+        this.app.use("/dashboard", dashboardMiddleware);
+        this.app.use("/dashboard", new DashboardRouting().router);
+    }
 
-    // Telling express to use our Controller's routes
-    this.app.use("/", surveysController.router);
-  }
+    private setViews() {
+        this.app.set('views', __dirname + '/views');
+        this.app.set('view engine', 'jsx');
+        this.app.engine('jsx', require('express-react-views').createEngine());
+    }
 }
 
 export default new App().app;

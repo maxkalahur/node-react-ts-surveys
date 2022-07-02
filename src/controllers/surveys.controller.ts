@@ -1,31 +1,23 @@
-import { Request, Response, Router } from "express";
+import { Request, Response } from "express";
 import { SurveysService } from "../services/surveys.service";
 
 export class SurveysController {
-    public router = Router();
-    
+
     constructor(private surveysService: SurveysService) {
-        this.setRoutes();
     }
 
-    public setRoutes() {
-        this.router.route("/").get(this.sayHello).post(this.add);
-        this.router.route("/all").get(this.findAll);
-        this.router.route("/:id").delete(this.delete).put(this.update);
-    }
-
-    private sayHello = (_: Request, res: Response) => {
+    public sayHello = (_: Request, res: Response) => {
         const welcomeMessage = this.surveysService.getWelcomeMessage();
-        res.send(welcomeMessage);
+        res.render('index');
     };
 
-    private findAll = async (_: Request, res: Response) => {
+    public findAll = async (_: Request, res: Response) => {
         try {
             const surveys = await this.surveysService.findAll();
             res.send(surveys);
         } catch (e) {
             if (e instanceof Error) {
-                res.status(500).send(e.message);
+                res.status(500).send(e!.message);
             }
             else {
                 
@@ -33,7 +25,7 @@ export class SurveysController {
         }
     };
 
-    private add = async (req: Request, res: Response) => {
+    public add = async (req: Request, res: Response) => {
         try {
             const addSurveyResult = await this.surveysService.add(req.body);
             res.send(addSurveyResult);
@@ -47,7 +39,7 @@ export class SurveysController {
         }
     };
 
-    private delete = async (req: Request, res: Response) => {
+    public delete = async (req: Request, res: Response) => {
         try {
             const deleteSurveyResult = await this.surveysService.delete(
                 req.params.id
@@ -63,7 +55,7 @@ export class SurveysController {
         }
     };
 
-    private update = async (req: Request, res: Response) => {
+    public update = async (req: Request, res: Response) => {
         try {
             const updateSurveyResult = await this.surveysService.update(
                 req.params.id,

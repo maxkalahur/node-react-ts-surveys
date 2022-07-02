@@ -1,4 +1,4 @@
 import app from "./app";
-import { PORT } from "./constants/surveys.constants";
+import config from "./config";
 
-app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+app.listen(config.app.port, () => console.log(`Listening on port ${config.app.port}`));
