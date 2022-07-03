@@ -11,10 +11,11 @@ export class AuthService {
 
     }
 
-    public async checkIfUserAdmin(key: string): Promise<any> {
+    public async checkIfUserAdmin(key: string) {
 
-        // hOE5zgRz
-        this.promoterApiService.call('/check-admin-user', { user_api_key: key });
+        const data = await this.promoterApiService.call('/check-admin-user', { user_api_key: key });
+
+        return data;
     }
 
 }

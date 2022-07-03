@@ -1,0 +1,377 @@
+.calendar-dropdown {
+    position: relative;
+    border-radius: $button-border-radius;
+    background: #f2f3f4;
+    width: 240px;
+    font-weight: 600;
+    border: 4px solid rgba(15,90,155,0);
+    display: block;
+    user-select: none;
+
+    // Hover/click effects
+    &:hover {
+        background: $hover-grey;
+    }
+    &:active {
+        background: $active-grey;
+    }
+
+    // Dropdown toggler
+    .calendar-dropdown-toggler {
+        font-size: 15px;
+        line-height: 15px;
+        padding: 10px 55px 10px 25px;
+        font-weight: 600;
+        color: #333;
+        position: relative;
+        z-index: 1;
+        cursor: pointer;
+
+        &:after {
+            background: rgba(0,0,0,.1);
+            height: 60%;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            width: 1px;
+            content: ' ';
+            z-index: 2;
+            position: absolute;
+            right: 49px;
+
+            @include smartphone {
+                & {
+                    right: 39px;
+                }
+            }
+        }
+
+        img {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 18px;
+            width: 14px;
+            height: 14px;
+            margin: auto;
+            -webkit-filter: grayscale(1);
+            filter: grayscale(1);
+
+            @include smartphone {
+                & {
+                    right: 10px;
+                }
+            }
+        }
+
+        span {
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            display: block;
+            text-overflow: ellipsis;
+        }
+
+        @include tablet {
+            & {
+                padding: 5px 55px 5px 10px;
+                font-size: 14px;
+            }
+        }
+
+        @include smartphone {
+            & {
+                padding: 5px 45px 5px 10px;
+                font-size: 14px;
+            }
+        }
+    }
+
+    // Dropdown menu
+    .calendar-dropdown-menu {
+        position: absolute;
+        background: #fff;
+        border-radius: 0 0 6px 6px;
+        border: none;
+        -webkit-box-shadow: hsla(0,0%,4%,.1) 0 15px 35px;
+        box-shadow: 0 15px 35px hsla(0,0%,4%,.1);
+        padding: 10px;
+        min-width: 477px;
+        height: auto;
+        width: auto;
+        z-index: 99;
+        top: calc(100% + 4px);
+        left: -4px;
+        opacity: 0;
+        visibility: hidden;
+
+        // Small version
+        &.small-menu {
+            min-width: 240px;
+        }
+
+        // Button links
+        .calendar-dropdown-nav {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            list-style: none;
+            margin: 0 0 20px 0;
+            padding: 0;
+
+            li {
+                display: block;
+
+                a {
+                    display: block;
+                    border-radius: 0;
+                    background: $light-grey;
+                    border: none;
+                    font-size: 13px;
+                    font-weight: 600;
+                    padding: 7.5px 15px;
+                    color: $dark-text;
+                    text-decoration: none;
+
+                    &:hover {
+                        background: $hover-grey;
+                    }
+
+                    &:active {
+                        background: $active-grey;
+                    }
+
+                    @extend .animated;
+                    @extend .disable-selection;
+                }
+
+                &.active {
+                    a {
+                        background: #0f5a9b;
+                        color: #fff;
+                    }
+                }
+
+                &:first-child {
+                    a {
+                        border-top-left-radius: $button-border-radius;
+                        border-bottom-left-radius: $button-border-radius;
+                    }
+                }
+
+                &:last-child {
+                    a {
+                        border-top-right-radius: $button-border-radius;
+                        border-bottom-right-radius: $button-border-radius;
+                    }
+                }
+            }
+        }
+
+        // Tabs
+        .dropdown-tab {
+            display: none;
+
+            h4 {
+                font-size: 14px;
+                font-weight: 600;
+                color: $dark-text;
+                padding: 0 0 10px 0;
+                margin: -5px 0 0 0;
+                display: block;
+            }
+
+            &.active {
+                display: block;
+            }
+        }
+
+        // Additional features on the menu
+        @extend .animated;
+
+        @include smartphone {
+            min-width: 300px;
+            left: -50px;
+        }
+    }
+
+    // When dropdown is "active"
+    &.active {
+        border-radius: 6px 6px 0 0;
+
+        .calendar-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    // Calendar tables
+    .month-datepicker {
+        display: inline-block;
+        vertical-align: middle;
+
+        .datepicker.datepicker-inline {
+            width: 205px;
+            padding: 0;
+            border-radius: $box-border-radius;
+
+            table {
+                margin: 0 auto 3px auto;
+                border-top: 1px solid #eee;
+                border-collapse: separate;
+                padding-top: 7px;
+
+                thead {
+                    border-top: 1px solid #eee;
+                }
+
+                tbody {
+
+                    tr td {
+                        border-top: 1px solid #eee;
+                        border-spacing: 5px;
+
+                        span {
+                            cursor: pointer;
+                            font-weight: normal;
+                            font-size: 0.9rem;
+
+                            &:hover {
+                                background: $hover-grey;
+                            }
+
+                            &:active {
+                                background: $active-grey;
+                            }
+
+                            &.active,
+                            &.active.disabled,
+                            &.active.disabled:hover,
+                            &.active:hover {
+                                background: $primary-blue;
+                                color: $white-text;
+                            }
+
+                            @extend .animated;
+                        }
+                    }
+
+                    &:before {
+                        content: ' ';
+                        display: block;
+                        width: 100%;
+                        height: 7px;
+                    }
+                }
+            }
+        }
+    }
+
+    // Calendar table divider
+    .from-to {
+        float: none;
+        display: inline-flex;
+        vertical-align: middle;
+        margin: 0;
+        padding: 0;
+        left: 0;
+        right: 0;
+        text-align: center;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        span {
+            display: block;
+            width: 40px;
+            height: 40px;
+            border-radius: $box-border-radius;
+            border: 2px solid #eee;
+            line-height: 36px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #666;
+            position: relative;
+
+            &:before {
+                position: absolute;
+                top: -80px;
+                left: 0;
+                right: 0;
+                width: 1px;
+                height: 65px;
+                background: #eee;
+                content: ' ';
+                margin: auto;
+
+                @include smartphone {
+                    & {
+                        top: 0;
+                        bottom: 0;
+                        left: -70px;
+                        right: auto;
+                        width: 60px;
+                        height: 1px;
+                    }
+                }
+            }
+
+            &:after {
+                position: absolute;
+                bottom: -80px;
+                left: 0;
+                right: 0;
+                width: 1px;
+                height: 65px;
+                background: #eee;
+                content: ' ';
+                margin: auto;
+
+                @include smartphone {
+                    & {
+                        top: 0;
+                        bottom: 0;
+                        right: -70px;
+                        left: auto;
+                        width: 60px;
+                        height: 1px;
+                    }
+                }
+            }
+        }
+
+        @include smartphone {
+            & {
+                text-align: center;
+                width: 100%;
+                border: none;
+                margin-bottom: 10px;
+                margin-top: -10px;
+            }
+        }
+    }
+
+    // Additional features
+    @extend .animated;
+    @extend .disable-selection;
+
+    @include small-desktop {
+        & {
+            width: 180px;
+        }
+    }
+
+    @include tablet {
+        & {
+            width: 150px;
+        }
+    }
+
+    @include smartphone {
+        & {
+            flex: 1 1 0;
+            max-width: 50%;
+        }
+    }
+}

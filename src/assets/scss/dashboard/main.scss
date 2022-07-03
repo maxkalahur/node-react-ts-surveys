@@ -1,0 +1,97 @@
+/*
+    Author: Filip Todorov - www.filiptodorov.com | www.filiptodorov.net
+    Project: Satisfied Patient Surveys 2021
+ */
+
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Lato:300,400,700");
+@import "../../../../node_modules/bootstrap/scss/bootstrap";
+
+// Variables
+@import "variables";
+@import "mixins";
+@import "components/header";
+@import "components/box";
+@import "components/survey-box";
+@import "components/errors";
+@import "components/popups";
+@import "components/build";
+@import "components/modals";
+@import "components/preview";
+@import "components/survey-page";
+@import "components/responses";
+@import "components/date-picker";
+@import "components/table";
+@import "components/errors";
+
+html, body {
+    font-family: $primary-font;
+    font-size: $font-size;
+    color: $dark-text;
+    background: $bluish-background-grey;
+}
+
+.page-content {
+    padding: 30px 0;
+
+    .container-fluid {
+        padding-left: 50px;
+        padding-right: 50px;
+
+        @include small-desktop {
+            & {
+                padding-left: 30px;
+                padding-right: 30px;
+            }
+        }
+
+        @include tablet {
+            & {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+        }
+
+        @include smartphone {
+            & {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+        }
+    }
+
+    @include smartphone {
+        & {
+            padding: 15px 0;
+        }
+    }
+}
+
+.new-modal {
+    display: none;
+}
+
+.tooltip {
+    .arrow {
+        display: none;
+    }
+
+    .tooltip-inner {
+        font-weight: 600;
+        font-size: 14px;
+        color: $white-text;
+        background: $dark-background-grey;
+        padding: 7px 20px;
+        border-radius: 35px;
+    }
+}
+
+.row.smaller-margins {
+    margin-left: -5px;
+    margin-right: -5px;
+
+    > div[class^='col'] {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+}

@@ -1,0 +1,113 @@
+.table-wrapper {
+    display: block;
+    background: $light-white;
+    padding: 15px 25px;
+    border-radius: $box-border-radius;
+    box-shadow: $box-shadow-grey 0 15px 35px;
+
+    table.table {
+        border: none;
+        margin: 0;
+
+        thead {
+            border: none;
+
+            tr {
+                th {
+                    border: none;
+                    vertical-align: middle;
+                    border-bottom: 1px solid $border-darker-grey;
+                    font-size: 13px;
+                    padding: 10px 10px;
+                    @extend .animated;
+
+                    &:hover {
+                        cursor: pointer;
+                        color: $primary-blue;
+                        background: $light-grey;
+                    }
+
+                    &:nth-child(1) {
+                        a {
+                            display: block;
+                            width: 100%;
+
+                            img {
+                                width: 16px;
+                                filter: grayscale(1);
+                                @extend .animated;
+                            }
+                            &:hover img {
+                                filter: none;
+                            }
+                        }
+                    }
+
+                    @include normal-desktop {
+                        & {
+                            font-size: 12px;
+                        }
+                    }
+
+                    @include small-desktop {
+                        & {
+                            font-size: 12px;
+                        }
+                    }
+
+                    @include tablet {
+                        & {
+                            font-size: 12px;
+                        }
+                    }
+
+                }
+            }
+        }
+
+        tbody {
+            tr {
+                border: none;
+
+                td {
+                    border: none;
+                    vertical-align: middle;
+                    font-size: 13px;
+                    padding: 10px 10px;
+
+                    a {
+                        color: $primary-blue;
+                        font-weight: 600;
+                    }
+
+                    @include normal-desktop {
+                        & {
+                            font-size: 12px;
+                        }
+                    }
+
+                    @include small-desktop {
+                        & {
+                            font-size: 12px;
+                        }
+                    }
+
+                    @include tablet {
+                        & {
+                            font-size: 12px;
+                        }
+                    }
+
+                    @extend .animated;
+
+                }
+
+                &:hover {
+                    td {
+                        background: $hover-grey;
+                    }
+                }
+            }
+        }
+    }
+}

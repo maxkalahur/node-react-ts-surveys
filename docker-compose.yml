@@ -11,3 +11,17 @@ services:
       - MONGO_INITDB_DATABASE=surveys
     ports:
       - 27017:27017
+
+  mongo-express:
+    image: mongo-express
+    environment:
+        - ME_CONFIG_MONGODB_SERVER=db
+        - ME_CONFIG_MONGODB_PORT=27017
+        - ME_CONFIG_MONGODB_ENABLE_ADMIN=false
+        - ME_CONFIG_MONGODB_AUTH_DATABASE=Surveys
+        - ME_CONFIG_BASICAUTH_USERNAME=dev
+        - ME_CONFIG_BASICAUTH_PASSWORD=dev
+    depends_on:
+        - db
+    ports:
+      - "8888:8081"

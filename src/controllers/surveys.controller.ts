@@ -8,7 +8,7 @@ export class SurveysController {
 
     public sayHello = (_: Request, res: Response) => {
         const welcomeMessage = this.surveysService.getWelcomeMessage();
-        res.render('index');
+        res.render('dashboard/index');
     };
 
     public findAll = async (_: Request, res: Response) => {

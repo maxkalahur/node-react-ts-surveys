@@ -1,0 +1,20 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset='utf-8')
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel="shortcut icon" href="/img/favicon.ico")
+    block styles
+        link(href="/css/app.css" rel="stylesheet")
+        //- link(href="/css/bootstrap.min.css" rel="stylesheet")
+        //- link(href="/css/jquery-ui.min.css" rel="stylesheet")
+        //- link(href="/css/jquery-ui.theme.min.css" rel="stylesheet")
+    title="Surveys | Satisfied Patient"
+  body
+    include components/header.pug
+    div(class="page-content")
+        div(class="container-fluid")
+            block content
+    block scripts
+        script(src='/js/app.js')

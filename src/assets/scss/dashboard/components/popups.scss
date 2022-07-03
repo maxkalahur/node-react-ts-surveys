@@ -1,0 +1,274 @@
+.modal.popup {
+    .modal-dialog {
+        .modal-content {
+            background: $light-white;
+            border-radius: $box-border-radius;
+            border: none;
+            padding: 25px 35px;
+            box-shadow: $box-shadow-grey 0 15px 25px;
+
+            .modal-header {
+                padding: 0 0 15px 0;
+                border-bottom: none;
+                display: block;
+
+                .modal-title {
+                    font-size: 18px;
+                    font-weight: 600;
+                }
+
+                p {
+                    margin-bottom: 0;
+                }
+            }
+
+            .modal-body {
+                position: relative;
+                padding: 0;
+
+                .form-control {
+                    padding: 15px 65px 15px 25px;
+                    border-radius: 35px;
+                    border: 1px solid $border-darker-grey;
+                    height: auto;
+                    position: relative;
+                    z-index: 1;
+
+                    &:focus {
+                        box-shadow: none;
+                        border: 1px solid $primary-blue;
+                    }
+                }
+
+                .btn.btn-primary {
+                    width: 45px;
+                    height: 45px;
+                    padding: 0;
+                    text-align: center;
+                    line-height: 1;
+                    border: none;
+                    background: $primary-blue;
+                    border-radius: 50%;
+                    display: inline-flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    position: absolute;
+                    top: 0;
+                    right: 5px;
+                    bottom: 0;
+                    margin: auto;
+                    z-index: 1;
+
+                    &:hover,
+                    &:focus {
+                        background: $secondary-blue;
+                        box-shadow: none !important;
+                        outline: none;
+                    }
+
+                    &:active {
+                        background: $active-blue;
+                        box-shadow: none !important;
+                    }
+
+                    img {
+                        filter: brightness(0) invert(1);
+                        transform-origin: center;
+                        transform: rotate(-90deg);
+                        width: 14px;
+                    }
+                }
+            }
+
+            .modal-error {
+                padding-top: 10px;
+                font-weight: bold;
+                font-size: 13px;
+                color: $danger-red;
+                display: none;
+            }
+
+            &.multiple-fields {
+
+                .modal-body {
+
+                    .form-control {
+                        border-radius: $box-border-radius;
+                    }
+
+                    .btn.btn-primary {
+                        position: relative;
+                        margin-left: auto;
+                        margin-right: 0;
+                        width: auto;
+                        height: auto;
+                        display: block;
+                        border-radius: $button-border-radius;
+                        padding: 10px 25px;
+                        font-weight: 600;
+                        text-transform: none;
+                        font-size: 15px;
+                        line-height: 1.5;
+                    }
+                }
+            }
+        }
+    }
+
+    &.delete-popup {
+        .modal-dialog {
+            .modal-content {
+                text-align: center;
+
+                .modal-header {
+                    .modal-title {
+                        color: $danger-red;
+                        font-size: 24px;
+                    }
+                }
+
+                .modal-body {
+                    .row {
+                        margin-left: -5px;
+                        margin-right: -5px;
+
+                        div[class^='col'] {
+                            padding-left: 5px;
+                            padding-right: 5px;
+                        }
+                    }
+
+                    .btn {
+                        background: $light-grey;
+                        border: none;
+                        color: $dark-text;
+                        padding: 10px 25px;
+                        font-weight: 600;
+                        text-transform: none;
+                        font-size: 15px;
+                        border-radius: $button-border-radius;
+
+                        &.btn-danger {
+                            background: $danger-red;
+                            background-color: $danger-red;
+                            color: $white-text;
+
+                            &:hover,
+                            &:focus {
+                                background: $danger-red;
+                                background-color: $danger-red;
+                                color: #fff;
+                                box-shadow: none !important;
+                            }
+                            &:active {
+                                background: $danger-red;
+                                background-color: $danger-red;
+                                outline: none;
+                                box-shadow: none !important;
+                            }
+
+                            img {
+                                filter: brightness(1);
+                                opacity: 1;
+                            }
+                        }
+
+                        &.btn-secondary {
+                            &:hover,
+                            &:focus {
+                                background: $hover-grey;
+                                color: $dark-text;
+                                outline: none;
+                                box-shadow: none !important;
+                            }
+                            &:active {
+                                background: $active-grey;
+                                color: $dark-text;
+                                box-shadow: none !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &.export-popup {
+        .modal-dialog {
+            .modal-content {
+                text-align: center;
+
+                .modal-header {
+                    .modal-title {
+                        color: $dark-text;
+                        font-size: 24px;
+                    }
+                }
+
+                .modal-body {
+                    .row {
+                        margin-left: -5px;
+                        margin-right: -5px;
+
+                        div[class^='col'] {
+                            padding-left: 5px;
+                            padding-right: 5px;
+                        }
+                    }
+
+                    .btn {
+                        background: $light-grey;
+                        border: none;
+                        color: $dark-text;
+                        padding: 10px 25px;
+                        font-weight: 600;
+                        text-transform: none;
+                        font-size: 15px;
+                        border-radius: $button-border-radius;
+
+                        &.btn-success {
+                            background: $primary-blue;
+                            background-color: $primary-blue;
+                            color: $white-text;
+
+                            &:hover,
+                            &:focus {
+                                background: $secondary-blue;
+                                background-color: $secondary-blue;
+                                color: #fff;
+                                box-shadow: none !important;
+                            }
+                            &:active {
+                                background: $active-blue;
+                                background-color: $active-blue;
+                                outline: none;
+                                box-shadow: none !important;
+                            }
+
+                            img {
+                                filter: brightness(1);
+                                opacity: 1;
+                            }
+                        }
+
+                        &.btn-secondary {
+                            &:hover,
+                            &:focus {
+                                background: $hover-grey;
+                                color: $dark-text;
+                                outline: none;
+                                box-shadow: none !important;
+                            }
+                            &:active {
+                                background: $active-grey;
+                                color: $dark-text;
+                                box-shadow: none !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

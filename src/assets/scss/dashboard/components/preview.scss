@@ -1,0 +1,152 @@
+.preview-page {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow-x: hidden;
+
+    // Scrollbar
+    &::-webkit-scrollbar {
+        width: 10px;
+        border-radius: 0;
+    }
+    &::-webkit-scrollbar-track {
+        background: rgba(0,0,0,0.025);
+        border-radius: 0;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: $border-darker-grey;
+        border-radius: 0;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+        background: $active-grey;
+    }
+
+    .preview-header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 15px 0;
+        opacity: 0.35;
+        transition: 0.25s ease all;
+        z-index: 1;
+
+        &:hover {
+            opacity: 1;
+        }
+
+        .btn.btn-primary {
+            background: $light-white;
+            border: none;
+            border-radius: $button-border-radius;
+            line-height: 30px;
+            padding: 10px 25px;
+            font-weight: bold;
+            color: $dark-text;
+
+            @extend .animated;
+
+            & + .btn {
+                margin-left: 10px;
+            }
+
+            &:hover,
+            &:focus {
+                background: $hover-grey;
+                color: $primary-blue;
+                box-shadow: none;
+                outline: none;
+            }
+
+            &:active {
+                background: $active-grey;
+                color: $primary-blue;
+                box-shadow: none;
+                outline: none;
+            }
+        }
+
+        ul {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+
+            li {
+                display: block;
+                padding-left: 10px;
+
+                a {
+                    display: block;
+                    width: 50px;
+                    height: 50px;
+                    background: $light-white;
+                    border-radius: $round-border-radius;
+                    text-align: center;
+                    line-height: 47px;
+
+                    @extend .animated;
+
+                    &:hover {
+                        background: $hover-grey;
+
+                        img {
+                            filter: none;
+                        }
+                    }
+
+                    &:active {
+                        background: $active-grey;
+                        box-shadow: none;
+                        outline: none;
+
+                        img {
+                            filter: none;
+                        }
+                    }
+
+                    &.active {
+                        background: $primary-blue;
+
+                        img {
+                            filter: brightness(0) invert(1);
+                        }
+                    }
+
+                    img {
+                        width: 24px;
+                        filter: grayscale(1);
+
+                        @extend .animated;
+                    }
+                }
+            }
+        }
+    }
+
+    .preview-area {
+        border: 1px solid #eee;
+        box-shadow: rgb(0 0 0 / 10%) 0px 5px 25px;
+        display: block;
+        margin: auto;
+        overflow: hidden;
+        width: 100%;
+        height: 100vh;
+        transition: 0.6s ease all;
+        z-index: 0;
+        position: relative;
+
+        &.mobile {
+            transform: translateY(80px);
+        }
+    }
+}

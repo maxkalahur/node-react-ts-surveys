@@ -4,24 +4,23 @@ import { User } from '../models/user.model';
 import { PromoterApiService } from "../services/api/promoter-api.service";
 import { AuthService } from "../services/auth/auth.service";
 
-export default function(req: any, res: express.Response, next: express.NextFunction) {
-console.log('start');
+export default async function(req: any, res: express.Response, next: express.NextFunction) {
 
     if ( !req.session.user && req.query.key ) {
 
         const key = req.query.key;
-        const userExistCheck: any = new AuthService(new PromoterApiService()).checkIfUserAdmin(key);
-        console.log(userExistCheck);
-        if( userExistCheck.res === "1" ) {
-            let user = User.findOne({ api_key: key }).exec();
+        const userExistCheck: any = await new AuthService(new PromoterApiService()).checkIfUserAdmin(key);
 
+        if( userExistCheck.res === 1 ) {
+            let user = await User.findOne({ api_key: key }).exec();
+            
             if( !user ) {
-                user = new User({
+                user = await new User({
                     apiKey: key,
-                    isSuperAdmin: userExistCheck.isSuperAdmin,
+                    isSuperAdmin: userExistCheck.is_superadmin,
                 }).save();
             }
-            console.log(user);
+            
             req.session.user = user;
             next();
         }

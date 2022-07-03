@@ -1,0 +1,248 @@
+.box {
+    display: block;
+    background: $light-white;
+    padding: 25px;
+    border-radius: $box-border-radius;
+    box-shadow: $box-shadow-grey 0 15px 35px;
+    margin-bottom: 30px;
+
+    .box-title {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+        margin-top: 0;
+        border-bottom: 1px solid $border-grey;
+
+        h3 {
+            font-weight: 700;
+            font-size: 16px;
+            color: $dark-text;
+            margin: 0;
+        }
+
+        .btn.btn-link {
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            font-weight: bold;
+            color: $primary-blue;
+            outline: none;
+            box-shadow: none;
+            text-decoration: none;
+
+            &:active {
+                color: $secondary-blue;
+            }
+        }
+
+        @include small-desktop {
+            & {
+                font-size: 20px;
+            }
+        }
+
+        @include smartphone {
+            & {
+                font-size: 20px;
+            }
+        }
+    }
+
+    &.folders-box {
+        position: sticky;
+        top: 154px;
+
+        ul {
+            display: block;
+            list-style: none;
+            max-height: 350px;
+            overflow-x: hidden;
+            width: calc(100% + 20px);
+            margin: 0 -10px;
+            padding: 0 10px;
+
+            &::-webkit-scrollbar {
+                width: 10px;
+                border-radius: 15px;
+            }
+            &::-webkit-scrollbar-track {
+                background: rgba(0,0,0,0.025);
+                border-radius: 15px;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: $border-darker-grey;
+                border-radius: 15px;
+            }
+            &::-webkit-scrollbar-thumb:hover {
+                background: $active-grey;
+            }
+
+            li {
+                display: block;
+
+                a {
+                    display: block;
+                    position: relative;
+                    padding: 10px 60px 10px 10px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    margin: 0 -10px;
+                    width: calc(100% + 20px);
+                    color: $dark-text;
+                    text-decoration: none;
+                    border-radius: $box-border-radius;
+
+                    @extend .animated;
+
+                    &:hover {
+                        background: $hover-grey;
+                    }
+
+                    &:active {
+                        background: $active-grey;
+                    }
+
+                    &.active-folder {
+                        color: $primary-blue;
+                        font-weight: 600;
+                    }
+
+                    .delete-it {
+                        position: absolute;
+                        top: 0;
+                        bottom: 0;
+                        right: 10px;
+                        margin: auto;
+                        width: 20px;
+                        height: 20px;
+                        border-radius: $box-border-radius;
+                        line-height: 20px;
+                        opacity: 0;
+                        visibility: hidden;
+
+                        @extend .animated;
+
+                        img {
+                            width: 16px;
+                            height: 16px;
+                            filter: grayscale(1);
+                        }
+                    }
+
+                    .edit-it {
+                        position: absolute;
+                        top: 0;
+                        bottom: 0;
+                        right: 10px;
+                        margin: auto;
+                        width: 20px;
+                        height: 20px;
+                        border-radius: $box-border-radius;
+                        line-height: 20px;
+                        opacity: 0;
+                        visibility: hidden;
+
+                        @extend .animated;
+
+                        img {
+                            width: 16px;
+                            height: 16px;
+                            filter: grayscale(1);
+
+                            @extend .animated;
+                        }
+                    }
+
+                    &:hover {
+                        .delete-it,
+                        .edit-it {
+                            opacity: 0.5;
+                            visibility: visible;
+
+                            &:hover {
+                                opacity: 1;
+                            }
+
+                            &:active {
+                                img {
+                                    filter: grayscale(0);
+                                }
+                            }
+                        }
+                    }
+
+                    @include smartphone {
+                        .delete-it,
+                        .edit-it {
+                            opacity: 0.5;
+                            visibility: visible;
+
+                            &:hover {
+                                opacity: 1;
+                            }
+
+                            &:active {
+                                img {
+                                    filter: grayscale(0);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .btn.btn-primary {
+            margin-top: 15px;
+            padding: 10px 25px;
+            font-weight: 600;
+            text-transform: none;
+            font-size: 15px;
+            line-height: 20px;
+            background: $primary-blue;
+            border-color: $primary-blue;
+            border-radius: $button-border-radius;
+
+            @extend .animated;
+
+            img {
+                filter: brightness(0) invert(1);
+                width: 12px;
+                height: 12px;
+                display: inline-block;
+                vertical-align: middle;
+                margin-right: 5px;
+            }
+
+            span {
+                display: inline-block;
+                vertical-align: middle;
+                margin-top: -1px;
+            }
+
+            &:hover,
+            &:focus {
+                background: $secondary-blue;
+                border-color: $secondary-blue;
+                box-shadow: none;
+                outline: none;
+            }
+
+            &:active {
+                background: $primary-blue;
+                border-color: $primary-blue;
+                box-shadow: none;
+                outline: none;
+            }
+        }
+    }
+
+    @include smartphone {
+        margin-bottom: 15px;
+    }
+
+}

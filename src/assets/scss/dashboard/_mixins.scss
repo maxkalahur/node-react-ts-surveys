@@ -1,0 +1,58 @@
+$smartphone: 768px;
+$tablet: 992px;
+$desktop: 1200px;
+$large-desktop: 1920px;
+
+@mixin smartphone {
+    @media (max-width: #{$smartphone - 1px}) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (min-width: #{$smartphone}) and (max-width: #{$tablet - 1px}) {
+        @content;
+    }
+}
+
+@mixin table-and-above {
+    @media (min-width: #{$smartphone}) {
+        @content;
+    }
+}
+
+@mixin small-desktop {
+    @media (min-width: #{$tablet}) and (max-width: #{$desktop - 1px}) {
+        @content;
+    }
+}
+
+@mixin desktop-and-above {
+    @media (min-width: #{$desktop}) {
+        @content;
+    }
+}
+
+@mixin normal-desktop {
+    @media (min-width: #{$desktop}) and (max-width: #{$large-desktop - 1px}) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (min-width: #{$large-desktop}) {
+        @content;
+    }
+}
+
+.animated {
+    transition: 0.15s ease all;
+}
+
+.disable-selection {
+    user-select: none;
+}
+
+.disable-clicks {
+    pointer-events: none;
+}

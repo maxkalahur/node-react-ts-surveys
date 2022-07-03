@@ -22,6 +22,7 @@ class App {
         this.app.use(bodyParser.json({ limit: "50mb" }));
         this.app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
         this.app.use(cors());
+        this.app.use(express.static(__dirname + '/../public'));
 
         const session = require('express-session');
         if (this.app.get('env') === 'production') {
@@ -42,14 +43,12 @@ class App {
     }
 
     private setRoutes() {
-        this.app.use("/dashboard", dashboardMiddleware);
-        this.app.use("/dashboard", new DashboardRouting().router);
+        this.app.use("/dashboard", dashboardMiddleware, new DashboardRouting().router);
     }
 
     private setViews() {
         this.app.set('views', __dirname + '/views');
-        this.app.set('view engine', 'jsx');
-        this.app.engine('jsx', require('express-react-views').createEngine());
+        this.app.set('view engine', 'pug');
     }
 }
 
