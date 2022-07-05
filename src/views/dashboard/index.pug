@@ -1,4 +1,58 @@
 extends layout.pug
 
+block second-header
+  nav(class="navbar navbar-expand-md navbar-dark bg-dark")
+    div(class="container-fluid")
+      form(action="#" class="search-bar")
+        input(type="text" class="form-control" placeholder="Search Surveys")
+        button(type="submit")
+          img(src="/img/icons/search.svg")
+      ul(class="navbar-nav ml-auto")
+        li(class="nav-item")
+          span 
+            | Sort by:
+        li(class="nav-item sort-link grey-button active")
+          a(class="nav-link" href="#" data-type="date")
+            | Date Created
+        li(class="nav-item sort-link grey-button")
+          a(class="nav-link" href="#" data-type="date")
+            | Title
+        li(class="nav-item sort-link grey-button")
+          a(class="nav-link" href="#" data-type="date")
+            | Total Responses
+
 block content
-  h1="Hello"
+  div(class="row")
+    div(class="col-xl-3 col-lg-4 col-md-5")
+      include components/folders.pug
+    div(class="col-xl-9 col-lg-8 col-md-7")
+      div(class="row" id="results")
+      div(id="no-results" style="display: none;")
+        div(class="beautified-error")
+          div(class="container")
+            div(class="row")
+              div(class="col-md-8 col-lg-8 col-xl-7 mx-auto text-center")
+                img(src="/img/no-results.jpg" class="img-fluid")
+                h4 No surveys found
+                p Please reset your search, or change the surveys folder.
+  div(class="modal fade popup delete-popup" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel")
+    div(class="modal-dialog" role="document")
+      div(class="modal-content")
+        div(class="modal-header")
+          button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+            span(aria-hidden="true")
+              | &times;
+          h4(class="modal-title" id="myModalLabel")
+            | Delete folder "
+            span(id="folder-name")
+            | "?
+        div(class="modal-body")
+          | All surveys within this folder will be unassigned.
+          div(class="row mt-4 pt-4 border-top")
+            div(class="col-6")
+              button(type="button" class="btn btn-secondary btn-block" data-dismiss="modal")
+                | Cancel
+            div(class="col-6")
+              button(type="button" class="btn btn-danger btn-block" id="deleteFolderConfirm" data-id="")
+                | Delete Folder
+            
