@@ -1,8 +1,11 @@
 import { Document } from "mongoose";
+import { ISurvey } from "./survey.interface";
 
 export interface IResponder extends Document {
     email: string;
-    surveyId: number;
+    survey: ISurvey;
     promoterId: number;
     ehrPlatform: string;
+    createdAt: Date;
+    updatedAt: Date;
 }

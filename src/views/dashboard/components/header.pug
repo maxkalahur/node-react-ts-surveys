@@ -1,26 +1,27 @@
-nav(class="navbar navbar-expand-md navbar-light bg-light")
-    div(class="container-fluid")
-        a(class="navbar-brand" href="/")
-            img(src="/img/logo.png" class="d-none d-md-block" alt="Satisfied Patient" title="Satisfied Patient")
-            img(src="/img/favicon.png" class="d-md-none" alt="Satisfied Patient" title="Satisfied Patient")
-            span(class="d-none d-md-block")
-                | Surveys
-        button(class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation")
-            span(class="navbar-toggler-icon")
-        navbar(class="collapse navbar-collapse" id="navbarDefault")
-            ul(class="navbar-nav mr-auto")
-                li(class="nav-item button")
-                    a(class="nav-link" href="/")
-                        | All Surveys
-                if survey
-                li(class="nav-item button")
-                    a(class="nav-link" href="/")
-                        | Organization
-                li(class="nav-item button")
-                    a(class="nav-link" href="/")
-                        | Build
-                li(class="nav-item button")
-                    a(class="nav-link" href="/")
-                        | Responses
+header
+    nav(class="navbar navbar-expand-md navbar-light bg-light")
+        div(class="container-fluid")
+            a(class="navbar-brand" href="/")
+                img(src="/img/logo.png" class="d-none d-md-block" alt="Satisfied Patient" title="Satisfied Patient")
+                img(src="/img/favicon.png" class="d-md-none" alt="Satisfied Patient" title="Satisfied Patient")
+                span(class="d-none d-md-block")
+                    | Surveys
+            button(class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation")
+                span(class="navbar-toggler-icon")
+            navbar(class="collapse navbar-collapse" id="navbarDefault")
+                ul(class="navbar-nav mr-auto")
+                    li(class="nav-item button")
+                        a(class="nav-link" href="/")
+                            | All Surveys
+                    if survey
+                    li(class="nav-item button")
+                        a(class="nav-link" href="/")
+                            | Organization
+                    li(class="nav-item button")
+                        a(class="nav-link" href="/")
+                            | Build
+                    li(class="nav-item button")
+                        a(class="nav-link" href="/")
+                            | Responses
 
-block second-header
+    block second-header

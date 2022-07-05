@@ -4,4 +4,6 @@ export interface IFolder extends Document {
     name: string;
     isActive: boolean;
     organizationId: number;
+    createdAt: Date;
+    updatedAt: Date;
 }

@@ -2,8 +2,8 @@ import { IResponse } from "../interfaces/response.interface";
 import { model, Schema } from "mongoose";
 
 const ResponseSchema = new Schema({
-        surveyId: { type: Number, index: true, required: [true, "Field is required"] },
-        responderId: { type: Number, index: true, required: [true, "Field is required"] },
+        survey: { type: Schema.Types.ObjectId, ref: 'Survey', index: true, required: [true, "Field is required"] },
+        responder: { type: Schema.Types.ObjectId, ref: 'Responder', index: true, required: [true, "Field is required"] },
         deviceType: { type: String, required: [true, "Field is required"] },
         browserType: { type: String, required: [true, "Field is required"] },
         score: { type: Number },

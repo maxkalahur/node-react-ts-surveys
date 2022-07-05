@@ -10,7 +10,8 @@ const dev = {
             resave: false,
             saveUninitialized: true,
             cookie: { maxAge: oneMonth }
-        }
+        },
+        domain: `http://localhost:9001`
     },
     mongo: {
         url: process.env.MONGO_URL! || 'localhost',

@@ -27,6 +27,47 @@ block content
       include components/folders.pug
     div(class="col-xl-9 col-lg-8 col-md-7")
       div(class="row" id="results")
+        each survey, k in surveys
+          div(id="results-item" item-id=survey.id class="col-md-12 col-lg-6 col-xl-4")
+            div(class="survey-box")
+              div(class="survey-header")
+                input(class="survey-title" item-id=survey.id type="text" value=survey.title data-index=k data-type="editSurveyName")
+              div(class="survey-body")
+                div(class="folder-here")
+                  if survey.organizationName
+                    img(src="/img/icons/folder.svg")
+                    strong(class="folder-name")= survey.organizationName
+                  else 
+                    | No Folder
+                div(class="survey-link")
+                  input(type="text" class="form-control" value=survey.link readonly)
+                  button(class="btn btn-link" data-action="copyTextField")= Copy
+              div(class="survey-stats")
+                div(class="row align-items-center")
+                  div(class="col-md-4")
+                    p
+                      strong= survey.amountOfResponses
+                      | Responses
+                  div(class="col-md-8 col-lg-12 col-xl-12 col-xxl-8")
+                    div(class="survey-static")
+                      p 
+                        span= `Provider Type`
+                        strong= survey.isMultipleProviders ? 'Multiple' : 'Single'
+                      p 
+                        span= `Last Response`
+                        strong= survey.lastResponseDateAt
+                      p 
+                        span= `Last Update`
+                        strong= survey.updatedAt
+                      p 
+                        span= `Request to contact?`
+                        strong= survey.isContactPageOff ? 'No' : 'Yes'
+              div(class="survey-bottom")
+                div(class="row")
+                  div(class="col-md-12")
+                    a(href=`/survey/${survey.id}` class="btn btn-link")= `Modify`
+                    a(href=`/survey/delete/${survey.id}` class="btn btn-link")= `Delete`
+                    a(href=`/survey/delete/${survey.id}/preview` target="_blank" class="btn btn-link")= `Live Preview`
       div(id="no-results" style="display: none;")
         div(class="beautified-error")
           div(class="container")

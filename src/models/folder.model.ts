@@ -9,4 +9,4 @@ const FolderSchema = new Schema({
     { versionKey: false, timestamps: true }
 );
 
-export const Survey = model<IFolder>("Survey", FolderSchema);
+export const Folder = model<IFolder>("Folder", FolderSchema);

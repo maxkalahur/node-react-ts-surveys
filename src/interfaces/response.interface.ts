@@ -1,8 +1,10 @@
 import { Document } from "mongoose";
+import { ISurvey } from "./survey.interface";
+import { IResponder } from "./responder.interface";
 
 export interface IResponse extends Document {
-    surveyId: number;
-    responderId: number;
+    survey: ISurvey;
+    responder: IResponder;
     deviceType: string;
     browserType: string;
     score: number;
@@ -16,4 +18,6 @@ export interface IResponse extends Document {
     isCompleted: boolean;
     completedAt: Date;
     status: 'Opened' | 'Started' | 'Completed';
+    createdAt: Date;
+    updatedAt: Date;
 }

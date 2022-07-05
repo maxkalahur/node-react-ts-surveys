@@ -1,19 +1,18 @@
 import { Router } from "express";
-import { SurveysController } from "../controllers/surveys.controller";
-import { SurveysService } from "../services/surveys.service";
+import { DashboardController } from "../controllers/dashboard.controller";
+import { DashboardService } from "../services/dashboard.service";
 
 export class DashboardRouting {
     public router = Router();
-    private surveysController = new SurveysController(new SurveysService());
+    private dashboardController = new DashboardController(new DashboardService());
     
     constructor() {
         this.setRoutes();
     }
 
     public setRoutes() {
-        this.router.route("/").get(this.surveysController.sayHello).post(this.surveysController.add);
-        this.router.route("/all").get(this.surveysController.findAll);
-        this.router.route("/:id").delete(this.surveysController.delete).put(this.surveysController.update);
+        this.router.route("/").get(this.dashboardController.index);
+        this.router.route("/:id").get(this.dashboardController.show);
     }
 
 }

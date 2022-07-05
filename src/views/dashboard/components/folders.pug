@@ -3,3 +3,8 @@ div(class="box folders-box folders")
         h3 Folders
         a(href="#" class="btn btn-link show-surveys") Show All Surveys
     ul
+        each folder in folders.length ? folders : ['There are no values']
+            li
+                a(href='#' class='showSurveysInFolder' data-id=folder.id)= folder.name
+                    div(class='delete-it' data-title=`Delete folder ${folder.name}`)
+                        img(src='/img/icons/trash.svg')
