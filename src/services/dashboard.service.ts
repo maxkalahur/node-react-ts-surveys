@@ -1,10 +1,14 @@
 import { TDashboardSurveyItem } from "../types/dashboard/survey.type";
+import { TDashboardResponseItem } from "../types/dashboard/response.type";
 import { IFolder } from "../interfaces/folder.interface";
+import { ISurvey } from "../interfaces/survey.interface";
+import { IResponse } from "../interfaces/response.interface";
 import { Survey } from "../models/survey.model";
 import { Folder } from "../models/folder.model";
 import { Response } from "../models/response.model";
 import date from 'date-and-time';
 import config from '../config';
+import internal from "stream";
 
 export class DashboardService {
 
@@ -50,4 +54,41 @@ export class DashboardService {
         return res;
     }
     
+    public async findResponses( surveyId: string, page: number, limit: number )
+                    : Promise<{ survey:ISurvey, responses:TDashboardResponseItem[], totalPages: number, page: number }> {
+
+        const survey = await Survey.findById(surveyId);
+
+        if( !survey ) {
+            throw Error;
+        }
+
+        const responsesOrigin = await Response.find({ survey: survey })
+                                    .limit(limit * 1)
+                                    .skip((page - 1) * limit)
+                                    .sort({ createdAt: -1 })
+                                    .exec();
+
+        const responses:TDashboardResponseItem[] = responsesOrigin.map(v => ({
+                                        id: v.id, 
+                                        deviceType: v.deviceType, 
+                                        browserType: v.browserType, 
+                                        score: v.score, 
+                                        why: v.why, 
+                                        provider: v.provider, 
+                                        name: v.name, 
+                                        email: v.email, 
+                                        phone: v.phone, 
+                                        createdAtFormatted: date.format(v.createdAt, 'D MMMM, YYYY'), 
+                                        updatedAtFormatted: date.format(v.updatedAt, 'D MMMM, YYYY'),
+                                        statusFormatted: v.status + (v.isActive) ? '' : (`archived`),
+                                        isContactMeFormatted: v.isContactMe ? 'Yes' : 'No',
+                                    }));
+                                    
+        const count = await Response.countDocuments({ survey: survey });
+        const totalPages = Math.ceil(count / limit);
+
+        return { survey, responses, totalPages, page };
+    }
+
 }

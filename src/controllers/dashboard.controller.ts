@@ -13,8 +13,13 @@ export class DashboardController {
         });
     };
 
-    public show = (_: Request, res: Response) => {
-        res.render('dashboard/index');
+    public show = async (req: Request, res: Response) => {
+
+        const { page = 1, limit = 10 } = req.query;
+
+        res.render('dashboard/survey', 
+            await this.dashboardService.findResponses(req.params.id, Number(page), Number(limit))
+        );
     };
 
 

@@ -65,9 +65,9 @@ block content
               div(class="survey-bottom")
                 div(class="row")
                   div(class="col-md-12")
-                    a(href=`/survey/${survey.id}` class="btn btn-link")= `Modify`
-                    a(href=`/survey/delete/${survey.id}` class="btn btn-link")= `Delete`
-                    a(href=`/survey/delete/${survey.id}/preview` target="_blank" class="btn btn-link")= `Live Preview`
+                    a(href=`/dashboard/${survey.id}` class="btn btn-link")= `Preview`
+                    a(href=`/dashboard/delete/${survey.id}` class="btn btn-link")= `Delete`
+                    a(href=`/dashboard/${survey.id}/preview` target="_blank" class="btn btn-link")= `Live Preview`
       div(id="no-results" style="display: none;")
         div(class="beautified-error")
           div(class="container")

@@ -1,0 +1,153 @@
+extends layout.pug
+
+block second-header
+  //- Secondary navigation (filters, search)
+  nav(class="navbar navbar-expand-md navbar-dark bg-dark")
+    div(class="container-fluid")
+
+      //- Date picker
+      ul(class="navbar-nav widget-navbar d-flex justify-content-center")
+        li(class="nav-item calendar-dropdown sub-navigation")
+          div(class="calendar-dropdown-toggler")
+            img(src="https://staging.satisfiedpatient.com/images/icons/calendar.png")
+            span(id="dateDisplay")
+              | July 2022
+          div(class="calendar-dropdown-menu")
+            ul(class="calendar-dropdown-nav")
+              li(class="active")
+                a(href="#" data-type="#allSurveys")= `All`
+                a(href="#" data-type="#dateMonth")= `Monthly`
+                a(href="#" data-type="#customRange")= `Custom Range`
+            div(class="calendar-dropdown-tabs")
+              div(class="dropdown-tab active" id="allSurveys")
+                h4= `Showing all responses`
+              form(class="date-switcher" method="get")
+                div(class="dropdown-tab" id="dateMonth")
+                  div(id="monthInput" class="month-datepicker")
+                  input(type="hidden" id="monthInputText" class="d-none")
+              form(class="date-switcher" method="get")
+                div(class="dropdown-tab" id="customRange")
+                  div(id="monthInput1" class="month-datepicker")
+                  div(class="from-to")
+                    span= `To`
+                  div(id="monthInput2" class="month-datepicker")
+                  input(type="hidden" id="monthInputText1" class="d-none")
+                  input(type="hidden" id="monthInputText2" class="d-none")
+      
+      //- Navbar 
+      ul(class="navbar-nav ml-auto")
+        li(class="nav-item grey-button")
+          a(href="#" class="showIncomplete nav-link")= `Show Incomplete`
+        li(class="nav-item grey-button")
+          a(href="#export-form-modal" class="nav-link" data-toggle="modal" data-target="#export-form-modal")= `Export Responses`
+
+
+block content
+  //- Export popup
+  div(class="modal fade popup export-popup" id="export-form-modal" tabindex="-1" role="dialog" aria-labelledby="exportFormLabel")
+    div(class="modal-dialog" role="document")
+      div(class="modal-content")
+        div(class="modal-header")
+          button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+            span(aria-hidden="true")
+              | &times;
+          h4(class="modal-title" id="exportFormLabel")= `Export Responses`
+        form(id="export-form" method="post" action=`/api/responses/${survey.id}/export/xlsx/false` class="modal-body")
+          div(class="form-group")
+            label= `Format`
+            select(class="input form-control")
+              option(value="XLSX")
+                | Excel (XLSX)
+              option(value="CSV")
+                | CSV (CSV)
+          div(class="checkbox")
+            label
+              input(type="checkbox" name="incompletes" class="incompletes")
+              span
+                | Include Incompletes
+          div(class="checkbox")
+            label
+              input(type="checkbox" name="allDates" class="allDates" checked)
+              span
+                | Include All Dates
+          div(class="row")
+            div(class="col-6")
+              a(href="#" class="btn btn-secondary btn-block" data-dismiss="modal")= `Cancel`
+            div(class="col-6")
+              input(type="submit" class="btn btn-success btn-block" value="Start Export")
+
+
+  //- Delete Response Popup
+  div(class="modal fade popup delete-popup" id="confirm-delete-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel")
+    div(class="modal-dialog" role="document")
+      div(class="modal-content")
+        div(class="modal-header")
+          button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+            span(aria-hidden="true")
+              | &times;
+          h4(class="modal-title" id="exportFormLabel")= `Confirm delete?`
+        div(class="modal-body")
+          | Are you sure you would like to delete these
+          b(class="count")= `0`
+          | responses?
+          div(class="row mt-4 pt-4 border-top")
+            div(class="row")
+              div(class="col-6")
+                button(type="button" class="btn btn-secondary btn-block" data-dismiss="modal")= `Cancel`
+              div(class="col-6")
+                button(type="button" class="btn btn-danger btn-block confirmDeleteButton")= `Confirm Delete`
+
+  div(class="table-wrapper")
+    div(class="table-responsive table-responsive-responsive")
+      table(class="table table-condensed table-hover table-text-left table-responses")
+        thead
+          tr
+            th(class="exportModal")
+              a(class="confirmDelete" href="#confirm-delete-modal" data-toggle="modal" data-target="#confirm-delete-modal")
+                img(src="/img/icons/trash.svg")
+            th= `Response Date`
+            th= `Last Update`
+            th= `Status`
+            th= `Device Type`
+            th= `Web Browser`
+            th= `How likely are you to recommend us to..`
+            th(title="Please select the provider you saw at your appointment." data-toggle="tooltip" data-placement="left")
+              | Please select the provider you saw at your appointment.
+            th(title="To help us improve, would you please tell us why you selected this rating?" data-toggle="tooltip" data-placement="left")
+              | To help us improve, would you please tell us why you selected this rating?
+            th(title="Please provide your first and last name as we would like to look into your feedback to help improve our service." data-toggle="tooltip" data-placement="left")
+              | Please provide your first and last name as we would like to look into your feedback to help improve our service.
+            th(title="Would you like to be contacted?" data-toggle="tooltip" data-placement="left")
+              | Would you like to be contacted?
+            th(title="Please provide your preferred contact information, and Colorado Allergy & Asthma Centers, P.C. will contact you about your experience. Thank you." data-toggle="tooltip" data-placement="left")
+              | Please provide your preferred contact information, and Colorado Allergy & Asthma Centers, P.C. will contact you about your experience. Thank you.
+        tbody
+
+            if responses.length > 0
+                each response in responses
+                    tr(class="item-row" item-id="#{response.id}" complete="#{response.isCompleted}")
+                        td(class="checkboxes")
+                            input(type="checkbox" value="1")
+                        td(id='item-date')= response.createdAtFormatted
+                        td(id='item-update-date')= response.updatedAtFormatted 
+                        td= response.statusFormatted
+                        td= response.deviceType
+                        td= response.browserType
+                        td= response.score
+                        td= response.provider
+                        td= response.why
+                        td= response.name
+                        td= response.isContactMeFormatted
+                        td!= [response.email, response.phone].join("<br/>")
+            else 
+                tr 
+                    td(colspan="12" class="text-center")
+                        | No responses for this period
+
+    br
+    div(class="pagination")
+        if page != 1
+            a(href=`?page=${page-1}`)= `Prev Page`
+        if totalPages > page
+            a(href=`?page=${page+1}`)= `Next Page`
+        
