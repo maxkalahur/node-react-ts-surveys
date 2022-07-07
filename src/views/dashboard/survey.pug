@@ -148,6 +148,8 @@ block content
     div(class="pagination")
         if page != 1
             a(href=`?page=${page-1}`)= `Prev Page`
+        if page > 1 && totalPages > page 
+            |  | 
         if totalPages > page
             a(href=`?page=${page+1}`)= `Next Page`
         

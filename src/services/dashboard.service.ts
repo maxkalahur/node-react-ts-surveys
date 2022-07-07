@@ -21,13 +21,12 @@ export class DashboardService {
     public async findSurveys(): Promise<TDashboardSurveyItem[]> {
 
         const surveys = await Survey.find({})
-                                    .populate( { path: 'folder', match: {} } )
+                                    .populate('folder')
                                     .exec();
 
         const promises = surveys.map(async v => {
             
             const lastResponse = await Response.findOne({ isCompleted: true, survey: v })
-                                                .populate('survey')
                                                 .sort({createdAt: -1})
                                                 .exec();
 

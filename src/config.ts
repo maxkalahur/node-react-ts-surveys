@@ -1,5 +1,7 @@
+import session from 'express-session'
 require('dotenv').config({path: __dirname + '/../.env'});
 
+const fileStore = require('session-file-store')(session);
 const oneMonth = 1000 * 60 * 60 * 24 * 30;
 
 const dev = {
@@ -9,7 +11,8 @@ const dev = {
             secret: process.env.APP_KEY!,
             resave: false,
             saveUninitialized: true,
-            cookie: { maxAge: oneMonth }
+            cookie: { maxAge: oneMonth },
+            store: new fileStore( { path: './../storage/sessions' } ),
         },
         domain: `http://localhost:9001`
     },
