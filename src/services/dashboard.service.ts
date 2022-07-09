@@ -43,6 +43,7 @@ export class DashboardService {
                 isContactPageOff: v.isContactPageOff,
                 lastResponseDateAt: lastResponse ? date.format(lastResponse.completedAt, 'D MMMM, YYYY') : null,
                 updatedAt: date.format(v.updatedAt, 'D MMMM, YYYY'),
+                createdAt: date.toString(),
             }
 
             return surveyItem;

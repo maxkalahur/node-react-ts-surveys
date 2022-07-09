@@ -7,8 +7,17 @@ export class DashboardController {
     }
 
     public index = async (_: Request, res: Response) => {
-        res.render('dashboard/index', {
-            folders: await this.dashboardService.findFolders(),
+        res.render('dashboard/index');
+    };
+
+    public findFolders = async (_: Request, res: Response) => {
+        res.json({
+            folders: await this.dashboardService.findFolders()
+        });
+    };
+
+    public findSurveys = async (_: Request, res: Response) => {
+        res.json({
             surveys: await this.dashboardService.findSurveys()
         });
     };

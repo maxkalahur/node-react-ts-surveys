@@ -2,8 +2,8 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    dashboardIndex: './src/assets/js/dashboard/index.ts',
-    dashboardSurvey: './src/assets/js/dashboard/survey.ts',
+    "dashboard-index": './src/assets/js/dashboard/index.ts',
+    "dashboard-survey": './src/assets/js/dashboard/survey.ts',
   },
   module: {
     rules: [

@@ -9,4 +9,5 @@ export type TDashboardSurveyItem = {
     isContactPageOff: boolean;
     lastResponseDateAt: string | null;
     updatedAt: string | null;
+    createdAt: string;
 }

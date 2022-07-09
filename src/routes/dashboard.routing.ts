@@ -12,6 +12,9 @@ export class DashboardRouting {
 
     public setRoutes() {
         this.router.route("/").get(this.dashboardController.index);
+        this.router.route("/folders.json").get(this.dashboardController.findFolders);
+        this.router.route("/surveys.json").get(this.dashboardController.findSurveys);
+        
         this.router.route("/:id").get(this.dashboardController.show);
     }
 
