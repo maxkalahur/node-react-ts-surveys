@@ -7,7 +7,7 @@
     "start": "node .",
     "dev": "nodemon . & npm run scss",
     "scss": "sass --watch src/assets/scss/dashboard/main.scss public/css/app.css",
-    "frontend-js": "npx webpack build",
+    "frontend-js": "npx webpack build --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

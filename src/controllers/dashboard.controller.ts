@@ -16,6 +16,12 @@ export class DashboardController {
         });
     };
 
+    public deleteFolder = async (req: Request, res: Response) => {
+        res.json({
+            res: await this.dashboardService.deleteFolder(req.params.id)
+        });
+    };
+
     public findSurveys = async (_: Request, res: Response) => {
         res.json({
             surveys: await this.dashboardService.findSurveys()

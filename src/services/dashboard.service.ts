@@ -18,16 +18,27 @@ export class DashboardService {
                     .exec();
     }
 
+    public async deleteFolder(folderId: string): Promise<number> {
+        const folder = await Folder.findByIdAndRemove(folderId);
+
+        if( !folder ) {
+            throw Error;
+        }
+        
+        return 1;
+    }
+
     public async findSurveys(): Promise<TDashboardSurveyItem[]> {
 
         const surveys = await Survey.find({})
                                     .populate('folder')
+                                    .sort({ createdAt: -1 })
                                     .exec();
 
         const promises = surveys.map(async v => {
             
             const lastResponse = await Response.findOne({ isCompleted: true, survey: v })
-                                                .sort({createdAt: -1})
+                                                .sort({ createdAt: -1 })
                                                 .exec();
 
             const amountOfResponses = await Response.countDocuments({ isCompleted: true, survey: v });
@@ -36,14 +47,14 @@ export class DashboardService {
                 id: v.id,
                 title: v.title,
                 link: config.app.domain + '/s/' + v.code,
-                organizationName: v.folder.name,
-                organizationId: v.folder.id,
+                organizationName: v.folder ? v.folder.name : '-',
+                organizationId: v.folder ? v.folder.id : '-',
                 amountOfResponses: amountOfResponses,
                 isMultipleProviders: v.isMultipleProviders,
                 isContactPageOff: v.isContactPageOff,
                 lastResponseDateAt: lastResponse ? date.format(lastResponse.completedAt, 'D MMMM, YYYY') : null,
                 updatedAt: date.format(v.updatedAt, 'D MMMM, YYYY'),
-                createdAt: date.toString(),
+                createdAt: v.createdAt.toString(),
             }
 
             return surveyItem;
