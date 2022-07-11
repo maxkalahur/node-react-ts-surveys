@@ -1,13 +1,14 @@
 import { Request, Response } from "express";
-import { DashboardService } from "../services/dashboard.service";
+import path from "path";
+import { SurveyService } from "../services/survey.service";
 
-export class SurveysController {
+export class SurveyController {
 
-    constructor(private dashboardService: DashboardService) {
+    constructor(private surveyService: SurveyService) {
     }
 
-    public sayHello = (_: Request, res: Response) => {
-        res.render('dashboard/index');
+    public showSurvey = (_: Request, res: Response) => {
+        res.sendFile(path.resolve(__dirname+'/../../public/survey/index.html'));
     };
 
     // public findAll = async (_: Request, res: Response) => {

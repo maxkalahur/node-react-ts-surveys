@@ -1,7 +1,6 @@
 import { Application } from "express";
 import { DashboardRouting } from "./routes/dashboard.routing";
-// import { SurveyRouting } from "./routes/survey.routing";
-// import { ApiSurveyRouting } from "./routes/api/survey.routing";
+import { SurveyRouting } from "./routes/survey.routing";
 import dashboardMiddleware from "./middlewares/dashboard.middleware";
 import bodyParser from "body-parser";
 import cors from "cors";
@@ -46,8 +45,7 @@ class App {
 
     private setRoutes() {
         this.app.use("/dashboard", dashboardMiddleware, new DashboardRouting().router);
-        // this.app.use("/dashboard/:surveyId", dashboardMiddleware, new SurveyRouting().router);
-        // this.app.use("/api/survey", new ApiSurveyRouting().router);
+        this.app.use("/", new SurveyRouting().router);
     }
 
     private setViews() {
