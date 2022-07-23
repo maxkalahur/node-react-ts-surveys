@@ -13,7 +13,7 @@ export class SurveyRouting {
     public setRoutes() {
         this.router.route(["/s/:id","/i/:id"]).get(this.surveyController.showSurvey);
 
-
+        
     }
 
 }
