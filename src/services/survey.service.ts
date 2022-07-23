@@ -3,6 +3,16 @@ import { Survey } from "../models/survey.model";
 
 export class SurveyService {
 
+    public async getSurvey(surveyType: string, surveyId: string, preview: boolean): Promise<ISurvey> {
+        
+        const survey = await Survey.findOne({ code: surveyId }).exec();
+
+        if ( !survey ) {
+            throw new Error(`Survey with id '${surveyId}' not found`);
+        }
+        return survey;
+    }
+
     // public getWelcomeMessage() {
     //     return 'Welcome to pokeAPI REST by Nya ^^';
     // }
@@ -29,19 +39,19 @@ export class SurveyService {
     //     return deletedSurvey;
     // }
 
-    // public async update(id: string, survey: ISurvey): Promise<ISurvey> {
+    public async update(id: string, survey: ISurvey): Promise<ISurvey> {
 
-    //     const updatedSurvey = await Survey.findByIdAndUpdate(
-    //         id,
-    //         survey, 
-    //         {new: true}
-    //     ).exec();
+        const updatedSurvey = await Survey.findByIdAndUpdate(
+            id,
+            survey, 
+            {new: true}
+        ).exec();
     
-    //     if (!updatedSurvey) {
-    //         throw new Error(`Survey with id '${id}' not found`);
-    //     }
+        if (!updatedSurvey) {
+            throw new Error(`Survey with id '${id}' not found`);
+        }
     
-    //     return updatedSurvey;
-    // }
+        return updatedSurvey;
+    }
     
 }

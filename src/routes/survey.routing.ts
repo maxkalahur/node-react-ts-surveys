@@ -12,6 +12,7 @@ export class SurveyRouting {
 
     public setRoutes() {
         this.router.route(["/s/:id","/i/:id"]).get(this.surveyController.showSurvey);
+        this.router.route('/get-survey-data.json').get(this.surveyController.getSurvey);
 
         
     }

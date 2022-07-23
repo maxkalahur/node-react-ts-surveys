@@ -11,6 +11,12 @@ export class SurveyController {
         res.sendFile(path.resolve(__dirname+'/../../public/survey/index.html'));
     };
 
+    public getSurvey = async (req: Request, res: Response) => {
+        res.json({
+            survey: await this.surveyService.getSurvey(req.params.surveyType, req.params.surveyKey, Boolean(req.params.preview))
+        });
+    };
+
     // public findAll = async (_: Request, res: Response) => {
     //     try {
     //         const surveys = await this.surveysService.findAll();
