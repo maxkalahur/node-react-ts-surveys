@@ -1,4 +1,4 @@
-import { Survey, Response, Responder, Doctor, QuestionItem } from './';
+import { Survey, Response, Responder, QuestionItem } from './';
 import {createContext} from 'react';
 
 export interface AppContext {
@@ -6,13 +6,8 @@ export interface AppContext {
     survey: Survey,
     response: Response,
     responder: Responder,
-    doctors: Doctor[],
     questionsList: QuestionItem[],
-    questionFlows: [
-        ['Question','Providers','Name','ContactMe','Contacts','ThankYou'],     // Detractor Flow, score 1-6
-        ['Question','Providers','Name','ThankYou'],                            // Passive Flow, score 7-8
-        ['Providers','ThankYouPromoter'],                                      // Promoter Flow, score 9-10
-    ],
+    questionFlows: string[][],
 };
 
 export const AppCtx = createContext<AppContext | null>(null);

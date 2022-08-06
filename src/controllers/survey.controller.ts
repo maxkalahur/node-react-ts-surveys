@@ -4,8 +4,7 @@ import { SurveyService } from "../services/survey.service";
 
 export class SurveyController {
 
-    constructor(private surveyService: SurveyService) {
-    }
+    constructor(private surveyService: SurveyService) {}
 
     public showSurvey = (_: Request, res: Response) => {
         res.sendFile(path.resolve(__dirname+'/../../public/survey/index.html'));
@@ -13,7 +12,7 @@ export class SurveyController {
 
     public getSurvey = async (req: Request, res: Response) => {
         res.json({
-            survey: await this.surveyService.getSurvey(req.params.surveyType, req.params.surveyKey, Boolean(req.params.preview))
+            survey: await this.surveyService.getSurvey(String(req.query.surveyType), String(req.query.surveyKey), Boolean(req.query.preview))
         });
     };
 

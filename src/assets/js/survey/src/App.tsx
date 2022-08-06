@@ -11,16 +11,16 @@ export default function App() {
     const [appContext, setAppContext] = useState<AppContext | null>(null);
     // const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
-
+    
     useEffect(() => {
         
         try {
             const [ surveyType, surveyKey ]: string[] = window.location.pathname.split('/').filter(Boolean);
             const isPreview = new URLSearchParams(window.location.search).has('preview');
-
+            
             axios.get<AppContext>('/get-survey-data.json', { params: { surveyType: surveyType, surveyKey: surveyKey, preview: isPreview } })
                 .then(res => {
-                    setAppContext({...res.data, questionsList: []});
+                    setAppContext({...res.data});
                     setIsLoaded(true);
                 })
                 .catch(e => {

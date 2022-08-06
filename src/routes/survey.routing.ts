@@ -1,10 +1,11 @@
 import { Router } from "express";
 import { SurveyController } from "../controllers/survey.controller";
 import { SurveyService } from "../services/survey.service";
+import { PromoterApiService } from "../services/api/promoter-api.service";
 
 export class SurveyRouting {
     public router = Router();
-    private surveyController = new SurveyController(new SurveyService());
+    private surveyController = new SurveyController(new SurveyService(new PromoterApiService ));
     
     constructor() {
         this.setRoutes();
